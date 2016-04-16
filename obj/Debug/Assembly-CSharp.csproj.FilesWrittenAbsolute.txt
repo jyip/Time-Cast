@@ -1,0 +1,17 @@
+/Users/JYip/Developer/Time Cast/Temp/bin/Debug/Assembly-CSharp.dll.mdb
+/Users/JYip/Developer/Time Cast/Temp/bin/Debug/Assembly-CSharp.dll
+/Users/JYip/Developer/Time Cast/obj/Debug/Assembly-CSharp.dll
+/Users/JYip/Developer/Time Cast/obj/Debug/Assembly-CSharp.dll.mdb
+/Users/JYip/Developer/Time Cast/Temp/bin/Debug/UnityEngine.dll
+/Users/JYip/Developer/Time Cast/Temp/bin/Debug/UnityEditor.dll
+/Users/JYip/Developer/Time Cast/Temp/bin/Debug/UnityEngine.UI.dll
+/Users/JYip/Developer/Time Cast/Temp/bin/Debug/UnityEngine.Networking.dll
+/Users/JYip/Developer/Time Cast/Temp/bin/Debug/Mono.Cecil.dll
+/Users/JYip/Developer/Time Cast/Temp/bin/Debug/Unity.SerializationLogic.dll
+/Users/JYip/Developer/Time Cast/Temp/bin/Debug/Unity.DataContract.dll
+/Users/JYip/Developer/Time Cast/Temp/bin/Debug/ICSharpCode.NRefactory.dll
+/Users/JYip/Developer/Time Cast/Temp/bin/Debug/Unity.UNetWeaver.dll
+/Users/JYip/Developer/Time Cast/Temp/bin/Debug/Unity.UNetWeaver.dll.mdb
+/Users/JYip/Developer/Time Cast/Temp/bin/Debug/Unity.CecilTools.dll
+/Users/JYip/Developer/Time Cast/Temp/bin/Debug/Mono.Cecil.Pdb.dll
+/Users/JYip/Developer/Time Cast/Temp/bin/Debug/Mono.Cecil.Mdb.dll

@@ -14,7 +14,9 @@ public class DataManager : MonoBehaviour {
 
 	void Awake () {
 		DontDestroyOnLoad(transform.gameObject);
-		timers = getTimers();	}
+		timers = getTimers();	
+		Debug.Log(timers.Count);
+	}
 
     public void saveTimer(string name, int seconds) {
 		if(seconds <= 0 || name == "") {
@@ -30,6 +32,9 @@ public class DataManager : MonoBehaviour {
 
         setName(id, name);
         setSeconds(id, seconds);
+
+		TimerData timer = getTimer(id);
+		timers.Add(timer);
     }
 
     public int getTimerId() {
@@ -40,7 +45,7 @@ public class DataManager : MonoBehaviour {
 		List<TimerData> timerList = new List<TimerData>();
 
         for(int i = 0; i < MAX_TIMERS; i++) {
-            TimerData timer = getTimer();
+            TimerData timer = getTimer(i);
             if(timer) {
                 timerList.Add(timer);
 				idIterator++;
@@ -50,10 +55,10 @@ public class DataManager : MonoBehaviour {
         return timerList;
     }
 
-	public TimerData getTimer() {
+	public TimerData getTimer(int id) {
         TimerData timer = null;
-        string name = getName();
-        int seconds = getSeconds();
+		string name = getName(id);
+		int seconds = getSeconds(id);
 
 		if(name != "" && seconds > 0) {
             timer = ScriptableObject.CreateInstance<TimerData>();
@@ -72,11 +77,11 @@ public class DataManager : MonoBehaviour {
 		PlayerPrefs.SetInt (SECONDS_KEY + id.ToString(), seconds);
     }
 
-    private string getName() {
-        return PlayerPrefs.GetString(NAME_KEY + idIterator.ToString());
+    private string getName(int id) {
+        return PlayerPrefs.GetString(NAME_KEY + id.ToString());
     }
 
-    private int getSeconds() {
-        return PlayerPrefs.GetInt(SECONDS_KEY + idIterator.ToString());
+	private int getSeconds(int id) {
+        return PlayerPrefs.GetInt(SECONDS_KEY + id.ToString());
     }
 }
