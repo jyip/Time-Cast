@@ -4,18 +4,23 @@ using System.Collections.Generic;
 
 public class DataManager : MonoBehaviour {
 
+	public static DataManager instance = null;
+
 	const string NAME_KEY = "name_";
 	const string SECONDS_KEY = "seconds_";
 	const int MAX_TIMERS = 100;
 
-	private int idIterator = 0;
-
-	public List<TimerData> timers = new List<TimerData>();
+	public List<TimerData> timers = new List<TimerData>(MAX_TIMERS);
 
 	void Awake () {
-		DontDestroyOnLoad(transform.gameObject);
-		timers = getTimers();	
-		Debug.Log(timers.Count);
+		if (instance == null) {
+			instance = this;
+			timers = instance.getTimers();
+			DontDestroyOnLoad(gameObject);
+		} 
+		else if (instance != this) {
+			Destroy(gameObject);    
+		}
 	}
 
     public void saveTimer(string name, int seconds) {
@@ -25,8 +30,8 @@ public class DataManager : MonoBehaviour {
 		}
 
         int id = getTimerId();
-        if(id > MAX_TIMERS) {
-            Debug.LogError("Can not set timer. Maximum timers reached!");
+        if(id < 0) {
+            Debug.LogError("Can not set timer. Maximum set timers reached!");
             return;
         }
 
@@ -38,7 +43,13 @@ public class DataManager : MonoBehaviour {
     }
 
     public int getTimerId() {
-        return (idIterator == 0) ? 0 : idIterator + 1;
+		for(int i = 0; i < MAX_TIMERS; i++) {
+			if(timers[i] == null) {
+				return i;
+			}
+		}
+
+		return -1;
     }
 
 	private List<TimerData> getTimers() {
@@ -46,10 +57,7 @@ public class DataManager : MonoBehaviour {
 
         for(int i = 0; i < MAX_TIMERS; i++) {
             TimerData timer = getTimer(i);
-            if(timer) {
-                timerList.Add(timer);
-				idIterator++;
-            } else break;
+            timerList.Add(timer);
         }
 			
         return timerList;
@@ -84,4 +92,13 @@ public class DataManager : MonoBehaviour {
 	private int getSeconds(int id) {
         return PlayerPrefs.GetInt(SECONDS_KEY + id.ToString());
     }
+
+	public void printTimers() {
+		foreach(TimerData timer in timers)
+		{
+			if(timer) {
+				print (timer.name + ": " + timer.seconds);
+			}
+		}
+	}
 }

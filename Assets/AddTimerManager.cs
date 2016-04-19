@@ -41,6 +41,7 @@ public class AddTimerManager : MonoBehaviour {
 
 		if(result) {
 			DataManager.saveTimer(name, seconds);
+			DataManager.printTimers();
 		} else {
 			Debug.LogError("Failed to parse seconds to int");
 		}
