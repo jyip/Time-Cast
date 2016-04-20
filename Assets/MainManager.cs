@@ -4,13 +4,16 @@ using UnityEngine.SceneManagement;
 
 public class MainManager : MonoBehaviour {
 
-	private DataManager DataManager;
+	public GameObject timerListing;
 
+	private DataManager DataManager;
 	private GameObject addTimerButton;
+	private GameObject timerList;
 
 	void Awake () {
 		DataManager = GameObject.FindGameObjectWithTag("DataManager").GetComponent<DataManager>();
 		addTimerButton = GameObject.FindGameObjectWithTag("AddTimerButton");
+		timerList = GameObject.FindGameObjectWithTag("TimerList");
 	}
 
 	// Use this for initialization
@@ -18,6 +21,21 @@ public class MainManager : MonoBehaviour {
 		Screen.orientation = ScreenOrientation.Portrait;
 
 		DataManager.printTimers();
+
+		foreach(TimerData timer in DataManager.timers) {
+			if(timer) {
+				GameObject listing = Instantiate(timerListing) as GameObject;
+				listing.transform.parent = timerList.transform;
+
+				float yOffset = timerList.transform.childCount * 35;
+
+				listing.transform.position = new Vector3(
+					timerList.transform.position.x + 100,
+					yOffset,
+					timerList.transform.position.z
+				);
+			}
+		}
 
 		//		//set player control limits to screen width
 		//		theScreenWidth = Screen.width;
